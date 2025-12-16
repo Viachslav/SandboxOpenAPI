@@ -8,7 +8,7 @@ export function passwordRandom(length: number): string {
     return password;
 }
 
-export function usernameRandom(lenght : number): string {
+export function usernameRandom(length : number): string {
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let username = '';
     for(let i = 0; i < length; i++) {
