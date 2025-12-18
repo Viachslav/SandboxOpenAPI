@@ -25,7 +25,7 @@ test('GET /Book validate schema @positive @smoke', async ({request}) => {
 });
 
 test('GET /Book with correct ISBN in URL return html in response @negative', async ({ request}) => {
-    const response = await request.get('/BookStore/v1/Book/');
+    const response = await request.get('/BookStore/v1/Book/9781449325860');
     expect(response.status()).toBe(200);
     const contentType = response.headers()['content-type'];
     expect(contentType).toContain('text/html');
