@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { credentialsInvalidLoginPasswordCombination, credentialsInvalidPassword  } from '../../../testData/credentials';
+import { createUserInvalidLoginPasswordCombination, createUserInvalidPassword  } from '../../../testData/credentials';
 
 
-for (const { testName, data, expected } of credentialsInvalidLoginPasswordCombination) {
+for (const { testName, data, expected } of createUserInvalidLoginPasswordCombination) {
   test(testName, async ({ request }) => {
     const response = await request.post('/Account/v1/User', {
       headers: {
@@ -11,14 +11,15 @@ for (const { testName, data, expected } of credentialsInvalidLoginPasswordCombin
       },
       data,
     });
-    expect(response.status()).toBe(400);
     const body = await response.json();
-    expect(body).toEqual(expected);
     console.log(body);
+    expect(response.status()).toBe(400);
+    expect(body).toEqual(expected);
+
   });
 }
 
-for(const {testName, data, expected} of credentialsInvalidPassword) {
+for(const {testName, data, expected} of createUserInvalidPassword) {
   test(testName, async ({request}) =>{
     const response = await request.post('/Account/v1/User', {
       headers: {
@@ -27,10 +28,10 @@ for(const {testName, data, expected} of credentialsInvalidPassword) {
       },
       data,
     });
-    expect(response.status()).toBe(400);
     const body = await response.json();
-    expect(body).toEqual(expected);
     console.log(body);
+    expect(response.status()).toBe(400);
+    expect(body).toEqual(expected);
   });
 }
 

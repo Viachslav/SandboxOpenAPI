@@ -16,12 +16,6 @@ export function passwordRandom(length: number): string {
   for (let i = passwordChars.length; i < length; i++) {
     passwordChars.push(getRandomChar(allChars));
   }
-
-  for (let i = passwordChars.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [passwordChars[i], passwordChars[j]] = [passwordChars[j], passwordChars[i]];
-  }
-
   return passwordChars.join('');
 }
 

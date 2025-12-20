@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { timeCounter } from '../../../helper/timeCounter';
-
+import { measureTime } from '../../../helper/timeCounter';
 
 test("Delete user without UserID un url returns HTML response @negative", async ({request}) => {
     const response = await request.delete('/Account/v1/User');

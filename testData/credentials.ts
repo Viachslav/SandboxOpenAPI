@@ -10,7 +10,7 @@ const invalidPasswordWithoutLetters = '1234567!';
 const invalidPasswordWithoutNumbers = 'AbcdEfg!';
 const invalidPasswordWithoutChars = '1234Abcd';
 
-export const credentialsInvalidLoginPasswordCombination =
+export const createUserInvalidLoginPasswordCombination =
 [
     {
     testName : `POST /User Create user with empty payload @negative`,
@@ -41,7 +41,7 @@ export const credentialsInvalidLoginPasswordCombination =
 
 ];
 
-export const credentialsInvalidPassword =
+export const createUserInvalidPassword =
 [
     {
     testName : `POST /User Create user with 1 char password length @negative`,
@@ -83,4 +83,75 @@ export const credentialsInvalidPassword =
         password: invalidPasswordWithoutChars
     }
     }
-]
+];
+
+export const generateTokenInvalidLoginPasswordCombination =
+[
+    {
+    testName : `POST /GenerateToken user with empty payload @negative`,
+    expected: rensponseMessage,
+    data: {}
+    },     
+    {
+    testName : `POST /GenerateToken user without payload  @negative`,
+    expected: rensponseMessage,
+    data: undefined,
+    },     
+    {
+    testName : `POST /GenerateToken with empty username @negative`,
+    expected: rensponseMessage,
+    data: {
+                userName: emptyString,
+                password: validPassword
+            }
+    },     
+    {
+    testName : `POST /GenerateToken with empty password @negative`,
+    expected: rensponseMessage,
+    data: {
+            userName: validLogin,
+            password: emptyString
+            }
+    },     
+];
+
+export const generateTokenInvalidPassword =
+[
+    {
+    testName : `POST /GenerateToken with 1 char password length @negative`,
+    expected: {"token": null, "expires": null, "status": "Failed", "result": "User authorization failed."},    data: {
+        userName: validLogin,
+        password: invalidPassword1Char
+    }
+    },
+    {
+    testName : `POST /GenerateToken with 7 char password length @negative`,
+    expected: {"token": null, "expires": null, "status": "Failed", "result": "User authorization failed."},    data: {
+        userName: validLogin,
+        password: invalidPassword7Chars
+    }
+    },
+    {
+    testName : `POST /GenerateToken with incorrect password without letters @negative`,
+    expected: {"token": null, "expires": null, "status": "Failed", "result": "User authorization failed."},    data: { 
+        userName: validLogin,
+        password: invalidPasswordWithoutLetters
+    }
+    },
+    {
+    testName : `POST /GenerateToken with incorrect password without numbers @negative`,
+    expected: {"token": null, "expires": null, "status": "Failed", "result": "User authorization failed."},
+    data: { 
+        userName: validLogin,
+        password: invalidPasswordWithoutNumbers
+    }
+    },
+    {
+    testName : `POST /GenerateToken with incorrect password without special characters @negative`,
+    expected: {"token": null, "expires": null, "status": "Failed", "result": "User authorization failed."},    data: { 
+        userName: validLogin,
+        password: invalidPasswordWithoutChars
+    }
+    }
+];
+
