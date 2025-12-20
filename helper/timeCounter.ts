@@ -1,6 +1,7 @@
-export function timeCounter(): number {
-const start = performance.now();
+export async function measureTime<T>(fn: () => Promise<T>) {
+  const start = performance.now();
+  const result = await fn();
   const duration = performance.now() - start;
-  console.log(`Response time: ${duration.toFixed(2)} ms`);
-  return duration;
+  console.log(`Operation took ${duration} ms`);
+  return { result, duration };
 }

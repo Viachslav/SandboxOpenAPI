@@ -1,7 +1,7 @@
 export function passwordRandom(length: number): string {
   const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   const digits = '0123456789';
-  const symbols = '!@#$%^&*()_+[]{}|;:,.<>?';
+  const symbols = '!@#$%^&*';
   const allChars = letters + digits + symbols;
 
   const getRandomChar = (chars: string) =>

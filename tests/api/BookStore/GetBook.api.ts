@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import schema from '../../../schemas/bookValidResponse.schema.json';
-import { timeCounter } from '../../../helper/timeCounter';
+import { measureTime } from '../../../helper/timeCounter';
 
 const ajv = new Ajv({ allErrors: true });
 addFormats(ajv);
@@ -64,12 +64,11 @@ test('GET /Book with incorrect ISBN returns correct body @negative', async ({ re
 });
 
 test('GET /Book response is less than 500ms @positive', async ({ request }) => {
-  const response = await request.get('/BookStore/v1/Book', {
+  const { result: response, duration } = await measureTime(() => request.get('/BookStore/v1/Book', {
     params: {
       ISBN: `${BOOK_ISBN}`,
     },
-  });
-  const duration = timeCounter();
+  }));
   expect(response.status()).toBe(200);
   expect(duration).toBeLessThan(500);  
 });
